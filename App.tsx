@@ -354,8 +354,9 @@ function AIControllerPanel() {
   }
 
   // ─── Setup Form (also shown during CONNECTING) ───
-  if (showSetup || connectionState === ConnectionState.CONNECTING) {
-    const isConnecting = connectionState === ConnectionState.CONNECTING;
+  const stateStr = connectionState as string;
+  if (showSetup || stateStr === ConnectionState.CONNECTING) {
+    const isConnecting = stateStr === ConnectionState.CONNECTING;
     return (
       <div className="max-w-lg mx-auto py-8 px-4">
         <div className="glass rounded-2xl border border-slate-700/50 p-8">
