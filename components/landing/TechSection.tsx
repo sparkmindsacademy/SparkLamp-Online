@@ -7,9 +7,9 @@ const TechSection: React.FC = () => {
       icon: '🧠',
       color: 'border-orange-500/30 bg-orange-500/5',
       items: [
-        { name: '多模型适配', desc: '灵活支持 Gemini、通义千问等多种大模型' },
-        { name: 'Live API', desc: '实时双向流式交互，低延迟响应' },
-        { name: 'Function Calling', desc: 'AI 自主调用硬件控制函数' },
+        { name: '多模型适配', desc: '灵活支持 Gemini、通义千问等，可按需切换' },
+        { name: '多模态感知', desc: '语音 + 摄像头 + 屏幕共享，全方位交互' },
+        { name: 'AI 性格配置', desc: '自定义 AI 人设、知识领域与交互风格' },
       ]
     },
     {
@@ -19,7 +19,7 @@ const TechSection: React.FC = () => {
       items: [
         { name: 'MQTT 协议', desc: '轻量级物联网通信，发布/订阅模式' },
         { name: 'WebSocket', desc: '浏览器与 MQTT Broker 的桥接' },
-        { name: 'LiveKit', desc: '可选的实时音视频传输层' },
+        { name: '浏览器交互', desc: '打开本网站即可与台灯对话，无需安装' },
       ]
     },
     {
@@ -27,9 +27,9 @@ const TechSection: React.FC = () => {
       icon: '⚡',
       color: 'border-emerald-500/30 bg-emerald-500/5',
       items: [
-        { name: 'ESP32-S3', desc: '双核 240MHz，WiFi + BLE，驱动舵机' },
-        { name: 'SG90 舵机 ×4', desc: '底座旋转、大臂俯仰、小臂俯仰、灯头俯仰' },
-        { name: 'WS2812B LED', desc: '可编程 RGB LED，支持亮度调节' },
+        { name: '舵机驱动', desc: 'PRO 采用串口总线舵机（丝滑+反馈），Lite 采用 MG996R（高性价比）' },
+        { name: '多种上位机', desc: '支持 DFRobot K10、M5Stack CoreS3、树莓派等' },
+        { name: 'WS2812B LED', desc: '可编程 RGB LED，支持亮度与色彩调节' },
       ]
     },
     {
@@ -81,7 +81,7 @@ const TechSection: React.FC = () => {
           <h3 className="text-xl font-bold text-white mb-6">数据流</h3>
           <div className="flex flex-wrap items-center justify-center gap-3 text-sm">
             {[
-              { label: '用户语音/视觉', color: 'bg-orange-500/20 text-orange-300 border-orange-500/30' },
+              { label: '语音/摄像头/屏幕', color: 'bg-orange-500/20 text-orange-300 border-orange-500/30' },
               { label: '→', color: 'text-slate-600' },
               { label: 'AI 大模型', color: 'bg-purple-500/20 text-purple-300 border-purple-500/30' },
               { label: '→', color: 'text-slate-600' },

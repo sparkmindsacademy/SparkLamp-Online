@@ -23,11 +23,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onTryAI }) => {
           <h1 className="text-5xl lg:text-7xl font-black text-white leading-tight mb-6">
             <span className="gradient-text">SparkLamp</span>
             <br />
-            <span className="text-3xl lg:text-4xl font-bold text-slate-300">AI 多模态伴读台灯</span>
+            <span className="text-3xl lg:text-4xl font-bold text-slate-300">AI 多模态智能台灯</span>
           </h1>
           
           <p className="text-lg text-slate-400 leading-relaxed mb-8 max-w-lg">
-            融合 AI 语音交互、视觉识别与机械臂情感表达的智能台灯。不只是照亮书桌，更是孩子学习路上的 AI 伙伴。
+            融合 AI 语音交互、多模态视觉感知与机械臂情感表达的智能台灯。支持多种上位机与大模型灵活搭配，AI 性格和场景完全可自定义。
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -47,7 +47,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onTryAI }) => {
               <span className="text-purple-400">✦</span> 多模型灵活适配
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-blue-400">✦</span> ESP32 物联网
+              <span className="text-blue-400">✦</span> 多种上位机适配
             </div>
           </div>
         </div>

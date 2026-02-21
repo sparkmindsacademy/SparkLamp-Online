@@ -17,11 +17,11 @@ const Footer: React.FC<FooterProps> = ({ onNavigateAI }) => {
               </div>
               <div>
                 <span className="text-xl font-bold text-white">SparkLamp</span>
-                <span className="text-[10px] text-orange-400 block -mt-1">AI 伴读台灯</span>
+                <span className="text-[10px] text-orange-400 block -mt-1">AI 智能台灯</span>
               </div>
             </div>
             <p className="text-slate-500 text-sm leading-relaxed max-w-sm">
-              灵活支持多种大模型的青少年多模态伴读台灯。融合 AI 语音交互、视觉识别与机械臂情感表达，践行普惠创客理念。
+              灵活支持多种大模型与上位机的多模态智能台灯。融合 AI 语音交互、视觉感知与机械臂情感表达，场景由你定义。
             </p>
           </div>
 

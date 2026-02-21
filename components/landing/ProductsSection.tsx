@@ -47,15 +47,15 @@ const ProductsSection: React.FC = () => {
               </div>
               <h3 className="text-4xl font-bold text-white mb-4">SparkLamp PRO</h3>
               <p className="text-slate-400 text-lg mb-6 leading-relaxed">
-                搭载 4 自由度机械臂的旗舰版本。经典关节式台灯造型，多段式臂架结构可灵活调节角度，赋予台灯丰富的情感表达能力。3D 打印外壳，颜色可自由搭配，也支持二次设计修改。
+                搭载 4 自由度机械臂的旗舰版本。采用串口总线舵机，力矩更大、运动更丝滑，且支持位置反馈，调试便捷。经典关节式台灯造型，3D 打印外壳颜色可自由搭配，也支持二次设计修改。
               </p>
               
               <div className="space-y-4 mb-8">
                 {[
-                  { label: '4 自由度机械臂', desc: '底座旋转 + 大臂俯仰 + 小臂俯仰 + 灯头俯仰，实现 10+ 种情感动作' },
-                  { label: 'ESP32-S3 主控', desc: '双核处理器，支持 WiFi + 蓝牙，驱动舵机与 LED' },
+                  { label: '4 自由度串口舵机', desc: '力矩大、运动丝滑、支持位置反馈，调试方便' },
+                  { label: '多种上位机', desc: '支持 DFRobot K10、M5Stack CoreS3、树莓派等，也可通过浏览器交互' },
                   { label: '3D 打印结构', desc: 'PLA/PETG 材质，颜色自由搭配，开源设计支持二次修改' },
-                  { label: 'AI 多模态交互', desc: '灵活支持多种大模型，语音对话 + 视觉识别 + 肢体表达' },
+                  { label: 'AI 完全可配置', desc: '灵活适配多种大模型，AI 性格与场景自定义' },
                 ].map((spec, i) => (
                   <div key={i} className="flex gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-orange-400 mt-2 shrink-0" />
@@ -87,14 +87,14 @@ const ProductsSection: React.FC = () => {
               </div>
               <h3 className="text-4xl font-bold text-white mb-4">SparkLamp Lite</h3>
               <p className="text-slate-400 text-lg mb-6 leading-relaxed">
-                经典台灯造型的轻量版本。保留完整的 AI 语音交互和视觉识别能力，3D 打印外壳颜色可自由搭配，以更亲民的成本让每个家庭都能拥有 AI 伴读伙伴。
+                经典台灯造型的轻量版本。采用 MG996R 舵机，成本更低但性能依然出色。保留完整的 AI 语音交互和多模态视觉感知能力，3D 打印外壳颜色可自由搭配。
               </p>
               
               <div className="space-y-4 mb-8">
                 {[
-                  { label: '经典台灯设计', desc: '优雅的可调节臂架结构，3D 打印外壳颜色自由搭配' },
-                  { label: '完整 AI 能力', desc: '灵活支持多种大模型，语音交互无缩水' },
-                  { label: '视觉识别', desc: '支持摄像头接入，实现作业识别与内容分析' },
+                  { label: 'MG996R 舵机', desc: '成本低、性能可靠，满足日常使用需求' },
+                  { label: '多种上位机', desc: '同样支持 K10、CoreS3、树莓派等，也可通过浏览器交互' },
+                  { label: '多模态视觉', desc: '支持摄像头与屏幕共享，AI 可看到书本和屏幕内容' },
                   { label: '普惠定价', desc: '更低的硬件成本，开源设计支持二次修改' },
                 ].map((spec, i) => (
                   <div key={i} className="flex gap-3">
@@ -125,12 +125,18 @@ const ProductsSection: React.FC = () => {
               <tbody className="text-slate-300">
                 {[
                   ['AI 语音交互', '✅', '✅'],
-                  ['视觉识别', '✅', '✅'],
+                  ['多模态视觉（摄像头+屏幕）', '✅', '✅'],
+                  ['多种大模型适配', '✅', '✅'],
+                  ['AI 性格/场景自定义', '✅', '✅'],
+                  ['上位机适配', 'K10 / CoreS3 / 树莓派等', 'K10 / CoreS3 / 树莓派等'],
+                  ['浏览器在线交互', '✅', '✅'],
+                  ['舵机类型', '串口总线舵机', 'MG996R'],
+                  ['4 自由度机械臂', '✅', '✅'],
+                  ['运动丝滑度', '⭐⭐⭐', '⭐⭐'],
+                  ['舵机位置反馈', '✅', '—'],
+                  ['情感动作表达', '10+ 种', '10+ 种'],
+                  ['3D 打印 / 开源设计', '✅', '✅'],
                   ['MQTT 物联网', '✅', '✅'],
-                  ['4 自由度机械臂', '✅', '—'],
-                  ['情感动作表达', '10+ 种', '基础'],
-                  ['3D 打印结构', '✅', '✅'],
-                  ['开源设计', '✅', '✅'],
                 ].map(([feature, pro, lite], i) => (
                   <tr key={i} className="border-b border-slate-800/50 hover:bg-slate-800/30 transition">
                     <td className="py-3 px-4">{feature}</td>

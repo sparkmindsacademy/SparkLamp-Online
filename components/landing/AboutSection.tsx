@@ -15,7 +15,7 @@ const AboutSection: React.FC = () => {
             <div className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50">
               <h3 className="text-xl font-bold text-white mb-3">🌟 项目愿景</h3>
               <p className="text-slate-400 leading-relaxed text-sm">
-                SparkLamp 诞生于一个简单的想法：让每个孩子都能拥有一个有温度的 AI 学习伙伴。我们相信，AI 不应该只是冰冷的文字和语音，它应该有"身体"、有"表情"、有"性格"。通过将大模型与机器人技术结合，SparkLamp 让 AI 交互变得更加自然和有趣。
+                SparkLamp 诞生于一个简单的想法：让每个人都能拥有一个有温度的 AI 伙伴。我们相信，AI 不应该只是冰冷的文字和语音，它应该有"身体"、有"表情"、有"性格"——而这些性格和场景，完全由你来定义。
               </p>
             </div>
 
@@ -27,9 +27,9 @@ const AboutSection: React.FC = () => {
             </div>
 
             <div className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50">
-              <h3 className="text-xl font-bold text-white mb-3">🎯 教育理念</h3>
+              <h3 className="text-xl font-bold text-white mb-3">🎯 开放理念</h3>
               <p className="text-slate-400 leading-relaxed text-sm">
-                SparkLamp 采用苏格拉底式教学法——不直接给出答案，而是通过提问引导孩子自主思考。AI 会根据孩子的回答调整教学策略，同时通过机械臂的肢体语言给予即时的情感反馈，营造积极的学习氛围。
+                SparkLamp 不限定使用场景。你可以让它成为苏格拉底式的学科导师，也可以让它变成口语陪练伙伴、故事讲述者或编程助手。AI 的性格、知识领域和交互风格完全可配置，场景由你定义。
               </p>
             </div>
           </div>

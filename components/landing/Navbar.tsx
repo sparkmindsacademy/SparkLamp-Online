@@ -30,7 +30,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateAI }) => {
           </div>
           <div>
             <span className="text-xl font-bold text-white tracking-tight">SparkLamp</span>
-            <span className="text-[10px] text-orange-400 block -mt-1 font-medium">AI 伴读台灯</span>
+            <span className="text-[10px] text-orange-400 block -mt-1 font-medium">AI 智能台灯</span>
           </div>
         </a>
 
