@@ -308,7 +308,6 @@ function AIControllerPanel() {
     localStorage.setItem('sparklamp_config', JSON.stringify(newConfig));
     setConfig(newConfig);
     configRef.current = newConfig;
-    setShowSetup(false);
     startSession(newConfig);
   };
 
@@ -320,6 +319,7 @@ function AIControllerPanel() {
     if(processorRef.current) { processorRef.current.disconnect(); processorRef.current.onaudioprocess = null; }
     setConnectionState(ConnectionState.DISCONNECTED);
     sessionRef.current = null;
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -338,7 +338,7 @@ function AIControllerPanel() {
   ];
 
   // ─── Disconnected: Show setup or start button ───
-  if (connectionState === ConnectionState.DISCONNECTED && !showSetup) {
+  if ((connectionState === ConnectionState.DISCONNECTED || connectionState === ConnectionState.ERROR) && !showSetup) {
     return (
       <div className="flex flex-col items-center justify-center py-16 gap-6">
         <div className="w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-purple-600 flex items-center justify-center animate-pulse-glow">
@@ -353,15 +353,25 @@ function AIControllerPanel() {
     );
   }
 
-  // ─── Setup Form ───
-  if (showSetup && connectionState !== ConnectionState.CONNECTED) {
+  // ─── Setup Form (also shown during CONNECTING) ───
+  if (showSetup || connectionState === ConnectionState.CONNECTING) {
+    const isConnecting = connectionState === ConnectionState.CONNECTING;
     return (
       <div className="max-w-lg mx-auto py-8 px-4">
         <div className="glass rounded-2xl border border-slate-700/50 p-8">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold text-white">连接设置</h2>
-            <button onClick={() => setShowSetup(false)} className="text-slate-400 hover:text-white text-sm">✕ 关闭</button>
+            {!isConnecting && <button onClick={() => setShowSetup(false)} className="text-slate-400 hover:text-white text-sm">✕ 关闭</button>}
           </div>
+          {isConnecting ? (
+            <div className="flex flex-col items-center justify-center py-12 gap-4">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-500 to-purple-600 flex items-center justify-center animate-pulse">
+                <span className="text-2xl">💡</span>
+              </div>
+              <p className="text-slate-300 text-sm">正在连接 AI 助手...</p>
+              <p className="text-slate-500 text-xs">请允许麦克风权限</p>
+            </div>
+          ) : (
           <form onSubmit={handleConnect} className="space-y-5">
             <div>
               <label className="block text-xs font-medium text-orange-400 mb-1 uppercase tracking-wider">Google API Key *</label>
@@ -385,6 +395,7 @@ function AIControllerPanel() {
               {connectionState === ConnectionState.CONNECTING ? '连接中...' : '启动 AI 助手'}
             </button>
           </form>
+          )}
         </div>
       </div>
     );
