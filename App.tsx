@@ -49,6 +49,7 @@ function AIControllerPanel() {
   const [activeTab, setActiveTab] = useState<'chat' | 'logs'>('chat');
   const [chatInput, setChatInput] = useState('');
   const [showSetup, setShowSetup] = useState(false);
+  const [isScreenSharing, setIsScreenSharing] = useState(false);
 
   // Config form state
   const [googleKey, setGoogleKey] = useState('');
@@ -69,6 +70,9 @@ function AIControllerPanel() {
   const videoCanvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
   const videoIntervalRef = useRef<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const screenStreamRef = useRef<MediaStream | null>(null);
+  const screenVideoRef = useRef<HTMLVideoElement | null>(null);
+  const screenIntervalRef = useRef<number | null>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem('sparklamp_config');
@@ -171,6 +175,66 @@ function AIControllerPanel() {
     }, 'image/jpeg', 0.8);
   };
 
+  // ─── SCREEN SHARE LOGIC ───
+  const startScreenShare = async () => {
+    if (!sessionRef.current || !isSessionActive.current) {
+      addLog("请先连接 AI", "System", "error");
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getDisplayMedia({ video: { frameRate: 1 }, audio: false });
+      screenStreamRef.current = stream;
+      
+      // Create a hidden video element to capture frames
+      const video = document.createElement('video');
+      video.srcObject = stream;
+      video.muted = true;
+      video.playsInline = true;
+      await video.play();
+      screenVideoRef.current = video;
+
+      // Listen for user stopping share via browser UI
+      stream.getVideoTracks()[0].onended = () => {
+        stopScreenShare();
+      };
+
+      setIsScreenSharing(true);
+      addLog('屏幕共享已开启 - AI 可以看到你的桌面', 'System', 'success');
+
+      // Send frames at ~1 FPS
+      const canvas = document.createElement('canvas');
+      screenIntervalRef.current = window.setInterval(() => {
+        if (!screenVideoRef.current || !sessionRef.current || !isSessionActive.current) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        const scale = 0.5;
+        canvas.width = screenVideoRef.current.videoWidth * scale;
+        canvas.height = screenVideoRef.current.videoHeight * scale;
+        ctx.drawImage(screenVideoRef.current, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(async (blob) => {
+          if (blob && isSessionActive.current && sessionRef.current) {
+            try {
+              const base64Data = await processImageForGemini(blob);
+              sessionRef.current.sendRealtimeInput({ media: { mimeType: 'image/jpeg', data: base64Data } });
+            } catch (e) {}
+          }
+        }, 'image/jpeg', 0.5);
+      }, 1500);
+    } catch (e: any) {
+      if (e.name !== 'NotAllowedError') {
+        addLog(`屏幕共享失败: ${e.message}`, 'System', 'error');
+      }
+    }
+  };
+
+  const stopScreenShare = () => {
+    if (screenIntervalRef.current) { clearInterval(screenIntervalRef.current); screenIntervalRef.current = null; }
+    if (screenStreamRef.current) { screenStreamRef.current.getTracks().forEach(t => t.stop()); screenStreamRef.current = null; }
+    if (screenVideoRef.current) { screenVideoRef.current.pause(); screenVideoRef.current.srcObject = null; screenVideoRef.current = null; }
+    setIsScreenSharing(false);
+    addLog('屏幕共享已关闭', 'System', 'info');
+  };
+
   const connectToMqtt = async (topic: string) => {
     return new Promise<void>((resolve, reject) => {
       addLog(`Connecting to MQTT...`, 'System', 'info');
@@ -242,6 +306,7 @@ function AIControllerPanel() {
           onopen: () => {
             addLog('Connected to Gemini', 'System', 'success');
             setConnectionState(ConnectionState.CONNECTED);
+            setShowSetup(false);
             isSessionActive.current = true;
             if(processorRef.current) {
               processorRef.current.onaudioprocess = (e) => {
@@ -317,6 +382,7 @@ function AIControllerPanel() {
 
   const disconnect = () => {
     isSessionActive.current = false;
+    stopScreenShare();
     if(mqttClientRef.current) mqttClientRef.current.end();
     if(livekitRoomRef.current) livekitRoomRef.current.disconnect();
     if(audioContextRef.current) audioContextRef.current.close();
@@ -342,6 +408,8 @@ function AIControllerPanel() {
       if(audioContextRef.current) { try { audioContextRef.current.close(); } catch(e) {} }
       if(processorRef.current) { try { processorRef.current.disconnect(); processorRef.current.onaudioprocess = null; } catch(e) {} }
       if(videoIntervalRef.current) { clearInterval(videoIntervalRef.current); }
+      if(screenIntervalRef.current) { clearInterval(screenIntervalRef.current); }
+      if(screenStreamRef.current) { screenStreamRef.current.getTracks().forEach(t => t.stop()); }
       sessionRef.current = null;
     };
   }, []);
@@ -424,9 +492,15 @@ function AIControllerPanel() {
     <div className="w-full">
       {/* Header */}
       <div className="flex justify-between items-center mb-4 px-2">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           <span className="text-xs text-emerald-400 font-medium">已连接</span>
+          {isScreenSharing && (
+            <span className="text-xs text-red-400 font-medium flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+              🖥️ 屏幕共享中
+            </span>
+          )}
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
@@ -494,6 +568,7 @@ function AIControllerPanel() {
                   <button onClick={() => fileInputRef.current?.click()} className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 border border-slate-700 transition" title="上传图片">📎</button>
                   <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleFileUpload} />
                   <button onClick={handleSnapshot} className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 border border-slate-700 transition" title="拍照">📷</button>
+                  <button onClick={isScreenSharing ? stopScreenShare : startScreenShare} className={`p-2 rounded-lg border transition ${isScreenSharing ? 'bg-red-500/20 text-red-300 border-red-500/50 animate-pulse' : 'bg-slate-800 hover:bg-slate-700 text-slate-400 border-slate-700'}`} title={isScreenSharing ? '停止共享' : '共享屏幕'}>🖥️</button>
                   <input type="text" value={chatInput} onChange={(e) => setChatInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()} placeholder="输入消息..." className="flex-grow bg-black/50 border border-slate-700 rounded-lg px-3 text-white focus:outline-none focus:border-orange-500 text-sm" />
                   <button onClick={handleSendMessage} className="px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white rounded-lg font-semibold transition text-sm">发送</button>
                 </div>
