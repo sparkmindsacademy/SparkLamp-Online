@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background Circle with Gradient Stroke -->
+  <circle cx="50" cy="50" r="46" fill="#0f172a" stroke="url(#grad)" stroke-width="4" />
+  
+  <!-- Lightbulb Glass Shape -->
+  <path d="M32 56 A 26 26 0 1 1 68 56 L 62 74 L 38 74 Z" fill="#fbbf24" />
+  
+  <!-- Bulb Base/Threads -->
+  <rect x="40" y="77" width="20" height="4" rx="2" fill="#94a3b8" />
+  <rect x="42" y="83" width="16" height="4" rx="2" fill="#64748b" />
+  <path d="M47 89 L53 89 L51 92 L49 92 Z" fill="#475569" />
+  
+  <!-- Spark / Lightning Bolt Symbol (representing AI) -->
+  <path d="M 56 28 L 42 46 L 52 46 L 40 66" stroke="#0f172a" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

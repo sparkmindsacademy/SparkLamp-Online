@@ -1,0 +1,7 @@
+{
+  "name": "SparkLamp Web Controller",
+  "description": "A web-based AI controller for the SparkLamp using Gemini Multimodal Live API and MQTT.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

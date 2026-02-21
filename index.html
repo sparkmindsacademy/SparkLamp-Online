@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SparkLamp - 基于AI的青少年多模态伴读台灯</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content="SparkLamp 是一款基于国产大模型与普惠创客理念的青少年多模态伴读台灯，融合AI语音交互、视觉识别与机械臂表达。" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              spark: {
+                50: '#fff7ed',
+                100: '#ffedd5',
+                200: '#fed7aa',
+                300: '#fdba74',
+                400: '#fb923c',
+                500: '#f97316',
+                600: '#ea580c',
+                700: '#c2410c',
+                800: '#9a3412',
+                900: '#7c2d12',
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'Noto Sans SC', 'system-ui', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+      
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif; }
+      
+      .gradient-text {
+        background: linear-gradient(135deg, #f97316, #ec4899, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .glass {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      
+      .glow-orange { box-shadow: 0 0 60px rgba(249, 115, 22, 0.3); }
+      .glow-purple { box-shadow: 0 0 60px rgba(139, 92, 246, 0.3); }
+      
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+      }
+      .animate-float { animation: float 6s ease-in-out infinite; }
+      
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
+      
+      @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.2); }
+        50% { box-shadow: 0 0 40px rgba(249, 115, 22, 0.5); }
+      }
+      .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+      
+      .hero-gradient {
+        background: radial-gradient(ellipse at 30% 20%, rgba(249, 115, 22, 0.15) 0%, transparent 50%),
+                    radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                    linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+      }
+      
+      .section-dark {
+        background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+      }
+      
+      .card-hover {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .card-hover:hover {
+        transform: translateY(-8px);
+      }
+      
+      /* Scrollbar */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #0f172a; }
+      ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.41.0",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.4",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "livekit-client": "https://esm.sh/livekit-client@^2.17.1",
+    "mqtt": "https://esm.sh/mqtt@^5.15.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-950 text-slate-200">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
