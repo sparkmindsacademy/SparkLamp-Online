@@ -7,7 +7,7 @@ const TechSection: React.FC = () => {
       icon: '🧠',
       color: 'border-orange-500/30 bg-orange-500/5',
       items: [
-        { name: 'Google Gemini', desc: '多模态大模型，支持语音+视觉+文本' },
+        { name: '多模型适配', desc: '灵活支持 Gemini、通义千问等多种大模型' },
         { name: 'Live API', desc: '实时双向流式交互，低延迟响应' },
         { name: 'Function Calling', desc: 'AI 自主调用硬件控制函数' },
       ]
@@ -28,7 +28,7 @@ const TechSection: React.FC = () => {
       color: 'border-emerald-500/30 bg-emerald-500/5',
       items: [
         { name: 'ESP32-S3', desc: '双核 240MHz，WiFi + BLE，驱动舵机' },
-        { name: 'SG90 舵机 ×3', desc: '底座旋转、大臂俯仰、灯头俯仰' },
+        { name: 'SG90 舵机 ×4', desc: '底座旋转、大臂俯仰、小臂俯仰、灯头俯仰' },
         { name: 'WS2812B LED', desc: '可编程 RGB LED，支持亮度调节' },
       ]
     },
@@ -83,7 +83,7 @@ const TechSection: React.FC = () => {
             {[
               { label: '用户语音/视觉', color: 'bg-orange-500/20 text-orange-300 border-orange-500/30' },
               { label: '→', color: 'text-slate-600' },
-              { label: 'Gemini AI', color: 'bg-purple-500/20 text-purple-300 border-purple-500/30' },
+              { label: 'AI 大模型', color: 'bg-purple-500/20 text-purple-300 border-purple-500/30' },
               { label: '→', color: 'text-slate-600' },
               { label: 'Function Call', color: 'bg-blue-500/20 text-blue-300 border-blue-500/30' },
               { label: '→', color: 'text-slate-600' },

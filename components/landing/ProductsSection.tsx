@@ -47,15 +47,15 @@ const ProductsSection: React.FC = () => {
               </div>
               <h3 className="text-4xl font-bold text-white mb-4">SparkLamp PRO</h3>
               <p className="text-slate-400 text-lg mb-6 leading-relaxed">
-                搭载 3 自由度机械臂的旗舰版本。灵感来源于皮克斯经典台灯形象，采用工业机器人式关节设计，赋予台灯丰富的情感表达能力。
+                搭载 4 自由度机械臂的旗舰版本。经典关节式台灯造型，多段式臂架结构可灵活调节角度，赋予台灯丰富的情感表达能力。3D 打印外壳，颜色可自由搭配，也支持二次设计修改。
               </p>
               
               <div className="space-y-4 mb-8">
                 {[
-                  { label: '3 自由度机械臂', desc: '底座旋转 + 大臂俯仰 + 灯头俯仰，实现 10+ 种情感动作' },
+                  { label: '4 自由度机械臂', desc: '底座旋转 + 大臂俯仰 + 小臂俯仰 + 灯头俯仰，实现 10+ 种情感动作' },
                   { label: 'ESP32-S3 主控', desc: '双核处理器，支持 WiFi + 蓝牙，驱动舵机与 LED' },
-                  { label: '3D 打印结构', desc: 'PLA/PETG 材质，开源设计文件，支持自行打印制作' },
-                  { label: 'AI 多模态交互', desc: '语音对话 + 视觉识别 + 肢体表达，三位一体' },
+                  { label: '3D 打印结构', desc: 'PLA/PETG 材质，颜色自由搭配，开源设计支持二次修改' },
+                  { label: 'AI 多模态交互', desc: '灵活支持多种大模型，语音对话 + 视觉识别 + 肢体表达' },
                 ].map((spec, i) => (
                   <div key={i} className="flex gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-orange-400 mt-2 shrink-0" />
@@ -87,15 +87,15 @@ const ProductsSection: React.FC = () => {
               </div>
               <h3 className="text-4xl font-bold text-white mb-4">SparkLamp Lite</h3>
               <p className="text-slate-400 text-lg mb-6 leading-relaxed">
-                经典台灯造型的轻量版本。保留完整的 AI 语音交互和视觉识别能力，以更亲民的成本让每个家庭都能拥有 AI 伴读伙伴。
+                经典台灯造型的轻量版本。保留完整的 AI 语音交互和视觉识别能力，3D 打印外壳颜色可自由搭配，以更亲民的成本让每个家庭都能拥有 AI 伴读伙伴。
               </p>
               
               <div className="space-y-4 mb-8">
                 {[
-                  { label: '经典台灯设计', desc: '优雅的可调节臂架结构，兼顾美观与实用' },
-                  { label: '完整 AI 能力', desc: '同样搭载 Gemini 多模态 AI，语音交互无缩水' },
+                  { label: '经典台灯设计', desc: '优雅的可调节臂架结构，3D 打印外壳颜色自由搭配' },
+                  { label: '完整 AI 能力', desc: '灵活支持多种大模型，语音交互无缩水' },
                   { label: '视觉识别', desc: '支持摄像头接入，实现作业识别与内容分析' },
-                  { label: '普惠定价', desc: '更低的硬件成本，践行普惠创客理念' },
+                  { label: '普惠定价', desc: '更低的硬件成本，开源设计支持二次修改' },
                 ].map((spec, i) => (
                   <div key={i} className="flex gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0" />
@@ -127,7 +127,7 @@ const ProductsSection: React.FC = () => {
                   ['AI 语音交互', '✅', '✅'],
                   ['视觉识别', '✅', '✅'],
                   ['MQTT 物联网', '✅', '✅'],
-                  ['3 自由度机械臂', '✅', '—'],
+                  ['4 自由度机械臂', '✅', '—'],
                   ['情感动作表达', '10+ 种', '基础'],
                   ['3D 打印结构', '✅', '✅'],
                   ['开源设计', '✅', '✅'],

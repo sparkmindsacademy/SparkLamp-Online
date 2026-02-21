@@ -4,7 +4,7 @@ const features = [
   {
     icon: '🗣️',
     title: 'AI 语音伴读',
-    description: '基于 Gemini 大模型的实时语音交互，支持苏格拉底式教学法，引导孩子主动思考而非被动接受答案。',
+    description: '灵活支持 Gemini、通义千问、文心一言等多种大模型的实时语音交互，采用苏格拉底式教学法，引导孩子主动思考而非被动接受答案。',
     color: 'from-orange-500 to-amber-500',
     bgColor: 'bg-orange-500/10',
     borderColor: 'border-orange-500/20',
@@ -20,7 +20,7 @@ const features = [
   {
     icon: '🤖',
     title: '情感机械臂',
-    description: '3自由度机械臂赋予台灯丰富的肢体语言——点头、摇头、开心摇摆、害羞低头，让AI交互更有温度。',
+    description: '4自由度机械臂赋予台灯丰富的肢体语言——点头、摇头、开心摇摆、害羞低头，让AI交互更有温度。',
     color: 'from-blue-500 to-cyan-500',
     bgColor: 'bg-blue-500/10',
     borderColor: 'border-blue-500/20',

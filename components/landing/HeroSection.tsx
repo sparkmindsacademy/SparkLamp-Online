@@ -17,7 +17,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onTryAI }) => {
         <div className="animate-fadeInUp">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-500/10 border border-orange-500/20 rounded-full text-orange-400 text-xs font-medium mb-6">
             <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-pulse" />
-            基于国产大模型 · 普惠创客理念
+            多模型灵活适配 · 普惠创客理念
           </div>
           
           <h1 className="text-5xl lg:text-7xl font-black text-white leading-tight mb-6">
@@ -44,7 +44,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onTryAI }) => {
               <span className="text-orange-400">✦</span> 3D 打印开源硬件
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-purple-400">✦</span> Gemini 多模态 AI
+              <span className="text-purple-400">✦</span> 多模型灵活适配
             </div>
             <div className="flex items-center gap-2">
               <span className="text-blue-400">✦</span> ESP32 物联网

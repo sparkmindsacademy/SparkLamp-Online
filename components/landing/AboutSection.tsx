@@ -42,8 +42,8 @@ const AboutSection: React.FC = () => {
               
               {[
                 { date: '概念阶段', title: '灵感萌发', desc: '受皮克斯台灯启发，提出"有生命的台灯"概念', color: 'bg-orange-500' },
-                { date: '设计阶段', title: '结构设计', desc: '完成 3D 打印结构设计，确定 3 自由度机械臂方案', color: 'bg-amber-500' },
-                { date: '开发阶段', title: '软硬件开发', desc: 'ESP32 固件开发，Gemini API 集成，MQTT 通信调试', color: 'bg-purple-500' },
+                { date: '设计阶段', title: '结构设计', desc: '完成 3D 打印结构设计，确定 4 自由度机械臂方案', color: 'bg-amber-500' },
+                { date: '开发阶段', title: '软硬件开发', desc: 'ESP32 固件开发，多模型 API 集成，MQTT 通信调试', color: 'bg-purple-500' },
                 { date: '测试阶段', title: '用户测试', desc: '邀请青少年用户参与测试，收集反馈优化交互体验', color: 'bg-blue-500' },
                 { date: '发布阶段', title: 'PRO & Lite 发布', desc: '推出两个版本，满足不同需求和预算', color: 'bg-emerald-500' },
               ].map((milestone, i) => (
@@ -64,7 +64,7 @@ const AboutSection: React.FC = () => {
             <div className="mt-8 bg-gradient-to-r from-orange-500/10 to-purple-500/10 rounded-2xl p-6 border border-orange-500/20">
               <h4 className="text-white font-bold mb-2">📄 研究报告</h4>
               <p className="text-slate-400 text-sm mb-3">
-                《SparkLamp：基于国产大模型与普惠创客理念的青少年多模态伴读台灯》
+                《SparkLamp：基于多模态大模型与普惠创客理念的青少年伴读台灯》
               </p>
               <a 
                 href="./attachments/研究报告-SparkLamp：基于国产大模型与普惠创客理念的青少年多模态伴读台灯.pdf" 

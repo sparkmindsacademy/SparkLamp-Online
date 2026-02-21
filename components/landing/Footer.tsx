@@ -21,7 +21,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateAI }) => {
               </div>
             </div>
             <p className="text-slate-500 text-sm leading-relaxed max-w-sm">
-              基于国产大模型与普惠创客理念的青少年多模态伴读台灯。融合 AI 语音交互、视觉识别与机械臂情感表达。
+              灵活支持多种大模型的青少年多模态伴读台灯。融合 AI 语音交互、视觉识别与机械臂情感表达，践行普惠创客理念。
             </p>
           </div>
 
@@ -60,7 +60,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigateAI }) => {
             © 2025 SparkLamp Project. 基于普惠创客理念，开源共享。
           </p>
           <div className="flex items-center gap-4 text-xs text-slate-600">
-            <span>Powered by Gemini AI</span>
+            <span>Powered by Multi-Model AI</span>
             <span>·</span>
             <span>Built with ESP32</span>
             <span>·</span>
