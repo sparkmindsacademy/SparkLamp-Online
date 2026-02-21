@@ -176,7 +176,9 @@ function AIControllerPanel() {
       addLog(`Connecting to MQTT...`, 'System', 'info');
       const client = mqtt.connect(DEFAULT_MQTT_BROKER, { clientId: DEFAULT_CLIENT_ID, clean: true, connectTimeout: 4000, reconnectPeriod: 1000 });
       client.on('connect', () => { addLog('MQTT Connected', 'MQTT', 'success'); client.publish(topic, 'hello'); mqttClientRef.current = client; resolve(); });
-      client.on('error', (err) => { addLog(`MQTT Error: ${err.message}`, 'MQTT', 'error'); reject(err); });
+      client.on('error', (err) => { addLog(`MQTT Error: ${err.message}`, 'MQTT', 'error'); client.end(); reject(err); });
+      // Timeout fallback
+      setTimeout(() => { if (!mqttClientRef.current) { addLog('MQTT timeout, continuing...', 'MQTT', 'info'); mqttClientRef.current = client; resolve(); } }, 5000);
     });
   };
 
@@ -210,8 +212,10 @@ function AIControllerPanel() {
     try {
       setConnectionState(ConnectionState.CONNECTING);
       isSessionActive.current = false;
-      await connectToMqtt(currentConfig.mqttTopic);
-      await connectToLiveKit(currentConfig);
+      
+      // MQTT and LiveKit are non-blocking - don't let them prevent Gemini connection
+      try { await connectToMqtt(currentConfig.mqttTopic); } catch(e) { addLog('MQTT connection failed, continuing...', 'System', 'info'); }
+      try { await connectToLiveKit(currentConfig); } catch(e) { addLog('LiveKit connection failed, continuing...', 'System', 'info'); }
 
       audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
       outputNodeRef.current = audioContextRef.current.createGain();
@@ -328,6 +332,19 @@ function AIControllerPanel() {
       if (tracks.length > 0) { (tracks[0] as LocalTrackPublication).track?.attach(videoRef); }
     }
   }, [videoRef, connectionState]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      isSessionActive.current = false;
+      if(mqttClientRef.current) { try { mqttClientRef.current.end(); } catch(e) {} }
+      if(livekitRoomRef.current) { try { livekitRoomRef.current.disconnect(); } catch(e) {} }
+      if(audioContextRef.current) { try { audioContextRef.current.close(); } catch(e) {} }
+      if(processorRef.current) { try { processorRef.current.disconnect(); processorRef.current.onaudioprocess = null; } catch(e) {} }
+      if(videoIntervalRef.current) { clearInterval(videoIntervalRef.current); }
+      sessionRef.current = null;
+    };
+  }, []);
 
   const actionButtons = [
     { cmd: 'wake_up', label: '👋 Wake' }, { cmd: 'nod', label: '✅ Nod' },
