@@ -36,7 +36,7 @@ const ProductsSection: React.FC = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-orange-500/10 rounded-3xl blur-3xl" />
               <img 
-                src="./attachments/SparkLamp-PRO单独.png" 
+                src="https://cdn.jsdelivr.net/gh/SparkMindsAcademy/SparkLamp-Online/attachments/SparkLamp-PRO%E5%8D%95%E7%8B%AC.png" 
                 alt="SparkLamp PRO" 
                 className="relative z-10 w-full max-w-md mx-auto rounded-2xl glow-orange"
               />
@@ -76,7 +76,7 @@ const ProductsSection: React.FC = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-purple-500/10 rounded-3xl blur-3xl" />
               <img 
-                src="./attachments/SparkLamp-Lite.png" 
+                src="https://cdn.jsdelivr.net/gh/SparkMindsAcademy/SparkLamp-Online/attachments/SparkLamp-Lite.png" 
                 alt="SparkLamp Lite" 
                 className="relative z-10 w-full max-w-md mx-auto rounded-2xl glow-purple"
               />

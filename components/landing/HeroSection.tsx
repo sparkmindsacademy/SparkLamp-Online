@@ -52,23 +52,19 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onTryAI }) => {
           </div>
         </div>
 
-        {/* Right: Product Image */}
-        <div className="relative flex justify-center animate-float">
-          <div className="relative">
+        {/* Right: Video */}
+        <div className="relative flex justify-center animate-fadeInUp" style={{animationDelay: '0.2s'}}>
+          <div className="relative w-full max-w-lg">
             <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-purple-500/20 rounded-3xl blur-3xl scale-110" />
-            <img 
-              src="./attachments/Lite&Pro.png" 
-              alt="SparkLamp PRO 和 Lite 版本" 
-              className="relative z-10 w-full max-w-lg rounded-2xl"
-            />
-            {/* Floating badges */}
-            <div className="absolute -left-4 top-1/4 glass px-3 py-2 rounded-xl border border-slate-700/50 text-xs z-20 animate-fadeInUp" style={{animationDelay: '0.3s'}}>
-              <span className="text-orange-400 font-bold">PRO</span>
-              <span className="text-slate-400 ml-1">机械臂版</span>
-            </div>
-            <div className="absolute -right-4 top-2/3 glass px-3 py-2 rounded-xl border border-slate-700/50 text-xs z-20 animate-fadeInUp" style={{animationDelay: '0.5s'}}>
-              <span className="text-purple-400 font-bold">Lite</span>
-              <span className="text-slate-400 ml-1">经典版</span>
+            <div className="relative z-10 w-full rounded-2xl overflow-hidden border border-slate-700/50 shadow-2xl shadow-orange-500/10" style={{aspectRatio: '16/9'}}>
+              <iframe 
+                src="//player.bilibili.com/player.html?isOutside=true&aid=116006194250863&bvid=BV1ytFjzME8z&cid=35794584163&p=1"
+                scrolling="no"
+                frameBorder="0"
+                allowFullScreen={true}
+                className="w-full h-full"
+                title="SparkLamp 介绍视频"
+              />
             </div>
           </div>
         </div>
