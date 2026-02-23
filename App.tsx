@@ -13,6 +13,7 @@ import { AppConfig, ConnectionState, LogEntry } from './types';
 import { createPcmBlob, base64ToFloat32Array } from './utils/audio';
 import { generateLiveKitToken } from './utils/token';
 import LampVisualizer from './components/LampVisualizer';
+import { Analytics } from '@vercel/analytics/react';
 
 // ─── Landing Page Sections ───
 import HeroSection from './components/landing/HeroSection';
@@ -587,32 +588,38 @@ export default function App() {
 
   if (currentPage === 'ai') {
     return (
-      <div className="min-h-screen bg-slate-950">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between mb-6">
-            <button onClick={() => setCurrentPage('home')} className="flex items-center gap-2 text-slate-400 hover:text-white transition text-sm">
-              <span>←</span> 返回首页
-            </button>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-purple-600 rounded-lg flex items-center justify-center"><span className="text-lg">💡</span></div>
-              <span className="text-white font-bold">SparkLamp AI</span>
+      <>
+        <div className="min-h-screen bg-slate-950">
+          <div className="max-w-6xl mx-auto px-4 py-6">
+            <div className="flex items-center justify-between mb-6">
+              <button onClick={() => setCurrentPage('home')} className="flex items-center gap-2 text-slate-400 hover:text-white transition text-sm">
+                <span>←</span> 返回首页
+              </button>
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-purple-600 rounded-lg flex items-center justify-center"><span className="text-lg">💡</span></div>
+                <span className="text-white font-bold">SparkLamp AI</span>
+              </div>
             </div>
+            <AIControllerPanel />
           </div>
-          <AIControllerPanel />
         </div>
-      </div>
+        <Analytics />
+      </>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
-      <Navbar onNavigateAI={() => setCurrentPage('ai')} />
-      <HeroSection onTryAI={() => setCurrentPage('ai')} />
-      <FeaturesSection />
-      <ProductsSection />
-      <TechSection />
-      <AboutSection />
-      <Footer onNavigateAI={() => setCurrentPage('ai')} />
-    </div>
+    <>
+      <div className="min-h-screen bg-slate-950">
+        <Navbar onNavigateAI={() => setCurrentPage('ai')} />
+        <HeroSection onTryAI={() => setCurrentPage('ai')} />
+        <FeaturesSection />
+        <ProductsSection />
+        <TechSection />
+        <AboutSection />
+        <Footer onNavigateAI={() => setCurrentPage('ai')} />
+      </div>
+      <Analytics />
+    </>
   );
 }
