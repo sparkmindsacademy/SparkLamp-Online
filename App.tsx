@@ -309,17 +309,15 @@ function AIControllerPanel() {
             setConnectionState(ConnectionState.CONNECTED);
             setShowSetup(false);
             isSessionActive.current = true;
+            sessionPromise.then(session => { sessionRef.current = session; }).catch(() => {});
             if(processorRef.current) {
               processorRef.current.onaudioprocess = (e) => {
                 if (!isSessionActive.current) return;
                 const inputData = e.inputBuffer.getChannelData(0);
                 const pcmBlob = createPcmBlob(inputData);
-                sessionPromise.then(session => {
-                  sessionRef.current = session;
-                  if (isSessionActive.current) {
-                    try { session.sendRealtimeInput({ media: pcmBlob }); } catch(err) {}
-                  }
-                }).catch(() => {});
+                if (sessionRef.current && isSessionActive.current) {
+                  try { sessionRef.current.sendRealtimeInput({ media: pcmBlob }); } catch(err) {}
+                }
               };
             }
           },
