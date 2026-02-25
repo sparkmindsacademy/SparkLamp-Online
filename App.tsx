@@ -131,7 +131,7 @@ function AIControllerPanel() {
   const handleSendMessage = () => {
     if (!chatInput.trim() || !sessionRef.current || !isSessionActive.current) return;
     try {
-      sessionRef.current.send({ clientContent: { turns: [{ role: 'user', parts: [{ text: chatInput }] }], turnComplete: true } });
+      sessionRef.current.sendClientContent({ turns: [{ role: 'user', parts: [{ text: chatInput }] }], turnComplete: true });
       addLog(chatInput, 'User', 'info');
       setChatInput('');
     } catch (e) { addLog("Failed to send message", 'System', 'error'); }
@@ -309,15 +309,12 @@ function AIControllerPanel() {
             setConnectionState(ConnectionState.CONNECTED);
             setShowSetup(false);
             isSessionActive.current = true;
-            sessionPromise.then(session => { sessionRef.current = session; }).catch(() => {});
             if(processorRef.current) {
               processorRef.current.onaudioprocess = (e) => {
-                if (!isSessionActive.current) return;
+                if (!isSessionActive.current || !sessionRef.current) return;
                 const inputData = e.inputBuffer.getChannelData(0);
                 const pcmBlob = createPcmBlob(inputData);
-                if (sessionRef.current && isSessionActive.current) {
-                  try { sessionRef.current.sendRealtimeInput({ media: pcmBlob }); } catch(err) {}
-                }
+                try { sessionRef.current.sendRealtimeInput({ media: pcmBlob }); } catch(err) {}
               };
             }
           },
@@ -331,10 +328,8 @@ function AIControllerPanel() {
                 else if (fc.name === 'turn_light_off') { publishAction('light_off'); }
                 else if (fc.name === 'stop_movement') { publishAction('stop'); }
                 else if (fc.name === 'reset_to_idle') { publishAction('release'); result = { result: "Servos released" }; }
-                if (isSessionActive.current) {
-                  sessionPromise.then(session => {
-                    if(isSessionActive.current) { session.sendToolResponse({ functionResponses: { id: fc.id, name: fc.name, response: result } }); }
-                  });
+                if (isSessionActive.current && sessionRef.current) {
+                  try { sessionRef.current.sendToolResponse({ functionResponses: { id: fc.id, name: fc.name, response: result } }); } catch(e) {}
                 }
               }
             }
@@ -366,6 +361,7 @@ function AIControllerPanel() {
           onerror: (err) => { isSessionActive.current = false; addLog(`Error: ${err.message}`, 'System', 'error'); }
         }
       });
+      sessionRef.current = await sessionPromise;
     } catch (e: any) { isSessionActive.current = false; addLog(`Setup Error: ${e.message}`, 'System', 'error'); setConnectionState(ConnectionState.ERROR); }
   };
 
