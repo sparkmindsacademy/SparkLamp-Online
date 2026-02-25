@@ -131,7 +131,7 @@ function AIControllerPanel() {
   const handleSendMessage = () => {
     if (!chatInput.trim() || !sessionRef.current || !isSessionActive.current) return;
     try {
-      sessionRef.current.sendClientContent({ turns: [{ role: 'user', parts: [{ text: chatInput }] }], turnComplete: true });
+      sessionRef.current.sendClientContent({ turns: chatInput, turnComplete: true });
       addLog(chatInput, 'User', 'info');
       setChatInput('');
     } catch (e) { addLog("Failed to send message", 'System', 'error'); }
